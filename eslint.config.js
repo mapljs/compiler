@@ -151,7 +151,6 @@ export default tsEslint.config({
         // #region TSLint
         "@typescript-eslint/adjacent-overload-signatures": "error",
         "@typescript-eslint/await-thenable": "error",
-        "@typescript-eslint/ban-ts-comment": "error",
         "@typescript-eslint/consistent-generic-constructors": "error",
         "@typescript-eslint/consistent-indexed-object-style": "warn",
         "@typescript-eslint/consistent-type-exports": "warn",
@@ -185,7 +184,6 @@ export default tsEslint.config({
         "@typescript-eslint/no-restricted-imports": "error",
         "@typescript-eslint/no-shadow": "error",
         "@typescript-eslint/no-this-alias": "error",
-        "@typescript-eslint/no-throw-literal": "error",
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
         "@typescript-eslint/no-unnecessary-qualifier": "warn",
         "@typescript-eslint/no-unnecessary-type-arguments": "warn",
@@ -223,14 +221,6 @@ export default tsEslint.config({
         "@typescript-eslint/switch-exhaustiveness-check": "error",
         "@typescript-eslint/triple-slash-reference": "error",
         "@typescript-eslint/unified-signatures": "error",
-        "@typescript-eslint/ban-types": [
-            "warn",
-            {
-                "types": {
-                    "{}": false
-                }
-            }
-        ],
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {

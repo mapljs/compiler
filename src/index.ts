@@ -1,21 +1,19 @@
-export type CompilerState = [
-  contentBuilder: string[],
-  declarationBuilder: string[][],
-  externalValues: any[],
-  localVarCount: number
-];
+export interface CompilerState {
+  contentBuilder: string[];
+  declarationBuilders: string[][];
+  externalValues: any[];
+  localVarCount: number;
+}
 
-export type GenericCompilerState = [...CompilerState, ...any[]];
-
-export function getExternalKeys(state: GenericCompilerState): string[] {
+export function getExternalKeys(state: CompilerState): string[] {
   // eslint-disable-next-line
-  return state[2].map((_, idx) => 'f' + idx);
+  return state.externalValues.map((_, idx) => 'f' + idx);
 }
 
-export function getDeclarations(state: GenericCompilerState): string {
-  return state[1].map((strs, idx) => `var d${idx}=${strs.join('')};`).join('');
+export function getDeclarations(state: CompilerState): string {
+  return state.declarationBuilders.map((strs, idx) => `var d${idx}=${strs.join('')};`).join('');
 }
 
-export function getContent(state: GenericCompilerState): string {
-  return state[0].join('');
+export function getContent(state: CompilerState): string {
+  return state.contentBuilder.join('');
 }
