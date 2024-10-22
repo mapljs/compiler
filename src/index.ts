@@ -4,9 +4,7 @@ export interface Builder<T> {
   map: (fn: (x: T, i: number, arr: this) => any) => any[];
 }
 
-export interface IterableBuilder<T> extends Builder<T>, Iterable<T> {
-  length: number;
-}
+export interface IterableBuilder<T> extends Builder<T>, Iterable<T> {}
 
 export interface CompilerState {
   contentBuilder: Builder<string>;
@@ -36,12 +34,12 @@ export const statelessNoOpBuilder: Builder<any> = {
  * A fake builder usable for externalValues
  */
 export function statefulNoOpBuilder(): IterableBuilder<any> {
+  const internalArray: null[] = [];
+
   return {
-    length: 0,
-    // eslint-disable-next-line
-    push() { return this.length += 1 },
+    push: () => internalArray.push(null),
     join: () => '',
-    map: () => [],
+    map: (fn) => internalArray.map(fn),
     [Symbol.iterator]: () => ({
       next: () => ({ done: true, value: null })
     })
