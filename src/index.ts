@@ -16,7 +16,7 @@ export interface CompilerState {
 
 export function getExternalKeys(state: CompilerState): string[] {
   // eslint-disable-next-line
-  return state.externalValues.map((_, idx) => 'f' + idx + 1);
+  return state.externalValues.map((_, idx) => 'f' + (idx + 1));
 }
 
 export function getDeclarations(state: CompilerState): string {
