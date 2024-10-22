@@ -1,13 +1,17 @@
 export interface Builder<T> {
-  push: (x: T) => number;
+  push: (...x: T[]) => number;
   join: (s: string) => string;
   map: (fn: (x: T, i: number, arr: this) => any) => any[];
+}
+
+export interface IterableBuilder<T> extends Builder<T>, Iterable<T> {
+  length: number;
 }
 
 export interface CompilerState {
   contentBuilder: Builder<string>;
   declarationBuilders: Builder<Builder<string>>;
-  externalValues: Builder<any>;
+  externalValues: IterableBuilder<any>;
 }
 
 export function getExternalKeys(state: CompilerState): string[] {
@@ -31,13 +35,15 @@ export const statelessNoOpBuilder: Builder<any> = {
 /**
  * A fake builder usable for externalValues
  */
-export function statefulNoOpBuilder(): Builder<any> {
-  let len = 0;
-
+export function statefulNoOpBuilder(): IterableBuilder<any> {
   return {
+    length: 0,
     // eslint-disable-next-line
-    push: () => len += 1,
+    push() { return this.length += 1 },
     join: () => '',
-    map: () => []
+    map: () => [],
+    [Symbol.iterator]: () => ({
+      next: () => ({ done: true, value: null })
+    })
   };
 }
