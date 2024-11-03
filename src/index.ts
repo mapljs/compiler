@@ -30,18 +30,6 @@ export const statelessNoOpBuilder: Builder<any> = {
   map: () => []
 };
 
-/**
- * A fake builder usable for externalValues
- */
-export function statefulNoOpBuilder(): IterableBuilder<any> {
-  const internalArray: null[] = [];
-
-  return {
-    push: () => internalArray.push(null),
-    join: () => '',
-    map: (fn) => internalArray.map(fn),
-    [Symbol.iterator]: () => ({
-      next: () => ({ done: true, value: null })
-    })
-  };
+export function createDeclaration(state: CompilerState): Builder<string> {
+  return state.declarationBuilders === statelessNoOpBuilder ? statelessNoOpBuilder : [] as string[];
 }
