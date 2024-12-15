@@ -28,13 +28,14 @@ export const statelessNoOpBuilder: Builder<any> = {
 };
 
 // eslint-disable-next-line
-export const createNoOpBuilder = <T>(): Builder<T> => {
+export const createNoOpBuilder = () => {
   let len = 0;
+
   return {
     push: () => ++len,
     join: () => '',
     map: () => []
-  };
+  } as Builder<any>;
 };
 
 // eslint-disable-next-line
