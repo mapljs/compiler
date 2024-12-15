@@ -1,6 +1,6 @@
 {
   "name": "@mapl/compiler",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Mapl compiler utilities",
   "keywords": [
     "compiler"
@@ -24,6 +24,5 @@
     "@types/bun": "latest",
     "mitata": "latest",
     "typescript": "latest"
-  },
-  "dependencies": {}
+  }
 }
